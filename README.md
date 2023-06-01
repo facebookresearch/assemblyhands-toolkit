@@ -22,9 +22,11 @@ pytorch >= 1.11.0
 
 ## Dataset preparation
 - Download the assemblyhands dataset from google drive with the access request.\
-[[ego images]](https://drive.google.com/drive/folders/10wxNJIw1db2ooHsspKYD1NijGyAe5Ozn?usp=share_link)
-[[annotations]](https://drive.google.com/drive/folders/1mPif4HbxfDbmAu7_prsVxqknL7nbJulI?usp=share_link)
+NOTE: we're preparing data downloading link now. Please wait for a while.
+<!-- [[ego images]](https://drive.google.com/drive/folders/10wxNJIw1db2ooHsspKYD1NijGyAe5Ozn?usp=share_link)
+[[annotations]](https://drive.google.com/drive/folders/1mPif4HbxfDbmAu7_prsVxqknL7nbJulI?usp=share_link) -->
 
+The number of images for each ego camera is not consistent because we only compressed valid egocentric images by excluding images without hands.
 
 - Assume the assemblyhands data is stored in \${DATA_DIR}. The structure of \${DATA_DIR} is as follows
 ```
@@ -55,7 +57,6 @@ All annotations must be accessible in `data/assemblyhands/annotations/`.
 - assemblyhands_${split}_${modality}_data.json: follows [COCO format](https://github.com/open-mmlab/mmpose/blob/master/docs/en/tutorials/2_new_dataset.md) and is used for single-view image loading.
 - assemblyhands_${split}_joint_3d.json: contains 3d keypoint anootations.
 - assemblyhands_${split}_${modality}_calib.json: stores camera parameters with `intrinsics` and `extrinsics`.
-<!-- - assemblyhands_${split}_${modality}_mv_data.json: multi-view anntoation format reordered by the camera names (C*: exo cameras, HMC*: ego cameras).  -->
 
 Keypoint order: 0-20 Right, 21-41 Left
 ```
@@ -90,7 +91,7 @@ python -m src.dataset.AssemblyHands-Ego.dataset
 
 
 ## Citation & license
-Please cite the following article if our codebase helps you.
+Please cite the following article if our code helps you.
 ```
 @inproceedings{ohkawa:cvpr23,
     title     = {{AssemblyHands:} Towards Egocentric Activity Understanding via 3D Hand Pose Estimation},
