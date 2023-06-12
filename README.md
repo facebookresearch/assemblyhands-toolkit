@@ -22,9 +22,8 @@ pytorch >= 1.11.0
 
 ## Dataset preparation
 - Download the assemblyhands dataset from google drive with the access request.\
-NOTE: we're preparing data downloading link now. Please wait for a while.
-<!-- [[ego images]](https://drive.google.com/drive/folders/10wxNJIw1db2ooHsspKYD1NijGyAe5Ozn?usp=share_link)
-[[annotations]](https://drive.google.com/drive/folders/1mPif4HbxfDbmAu7_prsVxqknL7nbJulI?usp=share_link) -->
+[[ego images]](https://drive.google.com/drive/folders/1CZC0uRSmgHpNXFwXPBRJGcnu7NxWmO6A?usp=sharing)
+[[annotations]](https://drive.google.com/drive/folders/1mPif4HbxfDbmAu7_prsVxqknL7nbJulI?usp=sharing)
 
 The number of images for each ego camera is not consistent because we only compressed valid egocentric images by excluding images without hands.
 
