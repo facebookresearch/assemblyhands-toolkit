@@ -21,7 +21,7 @@ pytorch >= 1.11.0
 ```
 
 ## Dataset preparation
-- Download the assemblyhands dataset from google drive with the access request.\
+- Download the assemblyhands dataset from google drive.\
 [[ego images]](https://drive.google.com/drive/folders/1CZC0uRSmgHpNXFwXPBRJGcnu7NxWmO6A?usp=sharing)
 [[annotations]](https://drive.google.com/drive/folders/1mPif4HbxfDbmAu7_prsVxqknL7nbJulI?usp=sharing)
 
@@ -41,7 +41,7 @@ The number of images for each ego camera is not consistent because we only compr
             - assemblyhands_${split}_joint_3d_v1-1.json
 
 ```
-*These annotation files are too large to read. Please see the `demo` annotations to check the format.
+Please see the `demo` annotations to check the format.
 
 - Link the data and annotations to this codebase.
 ```
