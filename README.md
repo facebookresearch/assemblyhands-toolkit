@@ -11,6 +11,8 @@ IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023\
 The dataset is also used in the challenge of the [HANDS workshop](https://sites.google.com/view/hands2023/home) in ICCV 2023.
 
 ## Release notes
+[Jun 26, 2023]: Add src/common/utils & upload skeleton.txt in the "annotations" folder \
+[Jun 26, 2023]: Fix a tar file of "nusar-2021_action_both_9075-c08b_9075_user_id_2021-02-12_101609.tar.gz" in the google drive \
 [May 24, 2023]: Open repository
 
 
@@ -49,6 +51,9 @@ mkdir -p data/assemblyhands
 ln -s ${DATA_DIR}/images data/assemblyhands 
 ln -s ${DATA_DIR}/annotations data/assemblyhands 
 ```
+
+The files that check image validity during data loading (`invalid_${split}_${modality}.txt`) will be generated when running the `dataset.py` first.
+With these files, image loading will be faster the second time and later.
 
 ## Annotation format
 All annotations must be accessible in `data/assemblyhands/annotations/`.
