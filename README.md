@@ -100,11 +100,7 @@ This is a visualizer script loading a two-hand-pose json. Once you have predicti
 python visualization/visualizer.py
 ```
 
-<figure class="video_container">
-<video height="400" controls="true" allowfullscreen="true">
-  <source src="assets/videos/vis_video_nusar-2021_action_both_9081-c11b_9081_user_id_2021-02-12_161433_HMC_21179183.mp4" type="video/mp4">
-</video>
-</figure>
+<img src="assets/videos/vis_video_nusar-2021_action_both_9081-c11b_9081_user_id_2021-02-12_161433_HMC_21179183.gif" height="400">
 
 ## Citation & license
 Please cite the following article if our code helps you.
