@@ -11,7 +11,8 @@ IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023\
 The dataset is also used in the challenge of the [HANDS workshop](https://sites.google.com/view/hands2023/home) in ICCV 2023.
 
 ## Release notes
-[Jun 26, 2023]: Add src/common/utils & upload skeleton.txt in the "annotations" folder \
+[Aug 11, 2023]: Add video visualizer in visualization/visualizer.py \
+[Jun 26, 2023]: Update src/common/utils & upload skeleton.txt in the "annotations" folder \
 [Jun 26, 2023]: Fix a tar file of "nusar-2021_action_both_9075-c08b_9075_user_id_2021-02-12_101609.tar.gz" in the google drive \
 [May 24, 2023]: Open repository
 
@@ -93,6 +94,17 @@ python -m src.dataset.AssemblyHands-Ego.dataset
 |<img src="assets/vis/vis_16766_right_2d.jpg" height="300"> | <img src="assets/vis/vis_16766_right_3d.jpg" height="300"> |
 |<img src="assets/vis/vis_11070_left_2d.jpg" height="300"> | <img src="assets/vis/vis_11070_left_3d.jpg" height="300"> |
 
+## Visualization
+This is a visualizer script loading a two-hand-pose json. Once you have predictions in world coordinates, you can visualize them as a video. Or you can use it for visualizing ground-truth.
+```
+python visualization/visualizer.py
+```
+
+<figure class="video_container">
+<video height="400" controls="true" allowfullscreen="true">
+  <source src="assets/videos/vis_video_nusar-2021_action_both_9081-c11b_9081_user_id_2021-02-12_161433_HMC_21179183.mp4" type="video/mp4">
+</video>
+</figure>
 
 ## Citation & license
 Please cite the following article if our code helps you.

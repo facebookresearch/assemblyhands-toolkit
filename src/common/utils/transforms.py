@@ -37,6 +37,14 @@ def cam2world_assemblyhands(pts_cam_3d, R, t):
     
     return pts_3d
 
+def world2pixel(pts_3d, KRT):
+    assert pts_3d.shape[1] == 3, f"shape error: {pts_3d.shape}"
+    _pts_3d = np.concatenate((pts_3d[:, :3], np.ones((pts_3d.shape[0], 1))), axis=-1)
+    pts_2d = np.matmul(_pts_3d, KRT.T)
+    pts_2d /= pts_2d[:, 2:3]
+    
+    return pts_2d
+
 def multi_meshgrid(*args):
     """
     Creates a meshgrid from possibly many
