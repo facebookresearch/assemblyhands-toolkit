@@ -102,6 +102,25 @@ python visualization/visualizer.py
 
 <img src="assets/videos/vis_video_nusar-2021_action_both_9081-c11b_9081_user_id_2021-02-12_161433_HMC_21179183.gif" height="400">
 
+## Related projects
+### ICCV 2023 HANDS challenge reports
+[A Concise Pipeline for Egocentric Hand Pose Reconstruction](https://drive.google.com/file/d/1C3oizCPxnQhZ_De_P9vZfszoIGUWelK3/view?usp=share_link): \
+Team: Zhishan Zhou*, Zhi Lv*, Shihao Zhou, Minqiang Zou, Tong Wu, Mochen Yu, Yao Tang, Jiajun Liang \
+Baseline:  ViT-based backbones and a simple regressor for 3D keypoints prediction \
+Preprocess: a warp perspective operation to make the hands near the edge less stretched \
+Postprocess: selective multi-view fusion, TTA, smoothing, and ensemble
+
+
+[Multi-View Fusion Strategy for Egocentric 3D Hand Pose Estimation](https://drive.google.com/file/d/1m_oJY0yvJZSLebDBopSL0Hsg0PhN-J_A/view?usp=share_link): \
+Team: Zhong Gao, Xuanyang Zhang \
+Baseline: heatmap regression and voting \
+Techniques: selective Feature Transform Layers for multi-view fusion
+
+[Egocentric 3D Hand Pose Estimation](https://drive.google.com/file/d/1Y9YnbX2jPbXSpmRj5OIOy2txnBTqgAH1/view?usp=share_link): \
+Team: Xue Zhang, Jingyi Wang, Fei Li, Rujie Liu \
+Baseline: HandOccNet + 2D heatmap regressor \
+Postprocess: weighted multi-view fusion
+
 ## Citation & license
 Please cite the following article if our code helps you.
 ```
