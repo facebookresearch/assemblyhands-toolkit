@@ -11,6 +11,7 @@ IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023\
 The dataset is also used in the challenge of the [HANDS workshop](https://sites.google.com/view/hands2023/home) in ICCV 2023.
 
 ## Release notes
+[Oct 16, 2023]: Add link to egocentric camera calibration.\
 [Aug 11, 2023]: Add video visualizer in visualization/visualizer.py \
 [Jun 26, 2023]: Update src/common/utils & upload skeleton.txt in the "annotations" folder \
 [Jun 26, 2023]: Fix a tar file of "nusar-2021_action_both_9075-c08b_9075_user_id_2021-02-12_101609.tar.gz" in the google drive \
@@ -26,6 +27,7 @@ pytorch >= 1.11.0
 ## Dataset preparation
 - Download the assemblyhands dataset from google drive.\
 [[ego images]](https://drive.google.com/drive/folders/1CZC0uRSmgHpNXFwXPBRJGcnu7NxWmO6A?usp=sharing)
+[[ego camera calibration]](https://drive.google.com/drive/folders/1uJfa2XHnShVpPua_EZoZcVTiTPUiHbnb?usp=sharing)
 [[annotations]](https://drive.google.com/drive/folders/1mPif4HbxfDbmAu7_prsVxqknL7nbJulI?usp=sharing)
 
 The number of images for each ego camera is not consistent because we only compressed valid egocentric images by excluding images without hands.
