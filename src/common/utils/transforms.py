@@ -9,41 +9,48 @@ import torch
 import numpy as np
 from scipy import linalg
 
+
 def cam2pixel(cam_coord, f, c):
     x = cam_coord[:, 0] / (cam_coord[:, 2] + 1e-8) * f[0] + c[0]
     y = cam_coord[:, 1] / (cam_coord[:, 2] + 1e-8) * f[1] + c[1]
     z = cam_coord[:, 2]
-    img_coord = np.concatenate((x[:,None], y[:,None], z[:,None]),1)
+    img_coord = np.concatenate((x[:, None], y[:, None], z[:, None]), 1)
     return img_coord
+
 
 def pixel2cam(pixel_coord, f, c):
     x = (pixel_coord[:, 0] - c[0]) / f[0] * pixel_coord[:, 2]
     y = (pixel_coord[:, 1] - c[1]) / f[1] * pixel_coord[:, 2]
     z = pixel_coord[:, 2]
-    cam_coord = np.concatenate((x[:,None], y[:,None], z[:,None]),1)
+    cam_coord = np.concatenate((x[:, None], y[:, None], z[:, None]), 1)
     return cam_coord
+
 
 def world2cam(world_coord, R, T):
     cam_coord = np.dot(R, world_coord - T)
     return cam_coord
 
+
 def world2cam_assemblyhands(pts_3d, R, t):
     pts_cam = np.dot(R, pts_3d.T).T + t
     return pts_cam
 
+
 def cam2world_assemblyhands(pts_cam_3d, R, t):
     inv_R = np.linalg.inv(R)
     pts_3d = np.dot(inv_R, (pts_cam_3d - t).T).T
-    
+
     return pts_3d
+
 
 def world2pixel(pts_3d, KRT):
     assert pts_3d.shape[1] == 3, f"shape error: {pts_3d.shape}"
     _pts_3d = np.concatenate((pts_3d[:, :3], np.ones((pts_3d.shape[0], 1))), axis=-1)
     pts_2d = np.matmul(_pts_3d, KRT.T)
     pts_2d /= pts_2d[:, 2:3]
-    
+
     return pts_2d
+
 
 def multi_meshgrid(*args):
     """
@@ -66,8 +73,9 @@ def multi_meshgrid(*args):
 def flip(tensor, dims):
     if not isinstance(dims, (tuple, list)):
         dims = [dims]
-    indices = [torch.arange(tensor.shape[dim] - 1, -1, -1,
-                            dtype=torch.int64) for dim in dims]
+    indices = [
+        torch.arange(tensor.shape[dim] - 1, -1, -1, dtype=torch.int64) for dim in dims
+    ]
     multi_indices = multi_meshgrid(*indices)
     final_indices = [slice(i) for i in tensor.shape]
     for i, dim in enumerate(dims):
@@ -76,6 +84,7 @@ def flip(tensor, dims):
     assert flipped.device == tensor.device
     assert flipped.requires_grad == tensor.requires_grad
     return flipped
+
 
 class Camera(object):
     def __init__(self, K, Rt, dist=None, name=""):
@@ -113,26 +122,31 @@ class Camera(object):
         new_cx = cx * (new_width / width)
         new_cy = cy * (new_height / height)
 
-        self.K[0, 0], self.K[1, 1], self.K[0, 2], self.K[1, 2] = new_fx, new_fy, new_cx, new_cy
+        self.K[0, 0], self.K[1, 1], self.K[0, 2], self.K[1, 2] = (
+            new_fx,
+            new_fy,
+            new_cx,
+            new_cy,
+        )
 
     @property
     def projection(self):
         return np.dot(self.K, self.Rt)
 
     def factor(self):
-        """  Factorize the camera matrix into K,R,t as P = K[R|t]. """
+        """Factorize the camera matrix into K,R,t as P = K[R|t]."""
 
         # factor first 3*3 part
-        K,R = linalg.rq(self.projection[:, :3])
+        K, R = linalg.rq(self.projection[:, :3])
 
         # make diagonal of K positive
         T = np.diag(np.sign(np.diag(K)))
         if linalg.det(T) < 0:
-            T[1,1] *= -1
+            T[1, 1] *= -1
 
-        K = np.dot(K,T)
-        R = np.dot(T,R) # T is its own inverse
-        t = np.dot(linalg.inv(self.K), self.projection[:,3])
+        K = np.dot(K, T)
+        R = np.dot(T, R)  # T is its own inverse
+        t = np.dot(linalg.inv(self.K), self.projection[:, 3])
 
         return K, R, t
 

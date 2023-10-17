@@ -1,3 +1,10 @@
+# Copyright (c) Facebook, Inc. and its affiliates.
+# All rights reserved.
+#
+# This source code is licensed under the license found in the
+# LICENSE file in the root directory of this source tree.
+#
+
 import os
 import cv2
 import json
@@ -17,7 +24,7 @@ def visualize_pose_on_frame(frame_path, camera_name, joints_3d_dict, calib, skel
     """
     img = cv2.imread(frame_path)
     assert len(img.shape) == 3, "Image must be a 3-channel BGR image."
-    frame_id = os.path.basename(frame_path).split('.')[0]
+    frame_id = os.path.basename(frame_path).split(".")[0]
 
     K = calib["intrinsics"][camera_name]
     Rt = calib["extrinsics"][frame_id][camera_name]
@@ -35,53 +42,98 @@ def visualize_pose_on_frame(frame_path, camera_name, joints_3d_dict, calib, skel
 
 def main(args):
     os.makedirs(args.save_path, exist_ok=True)
-    
+
     # set image path
-    ego_image_dir = os.path.join(args.ego_image_root, args.vis_set, args.vis_seq_name, args.vis_camera_name)
+    ego_image_dir = os.path.join(
+        args.ego_image_root, args.vis_set, args.vis_seq_name, args.vis_camera_name
+    )
     assert os.path.exists(ego_image_dir), f"Path {ego_image_dir} does not exist."
-    frame_list = sorted(glob.glob(f"{ego_image_dir}/*"))        
-    
+    frame_list = sorted(glob.glob(f"{ego_image_dir}/*"))
+
     # read annotation
     with open(args.calib_file) as f:
         ego_calib = json.load(f)["calibration"][args.vis_seq_name]
     with open(args.kpt_file) as f:
-        joints_3d_dict = json.load(f)["annotations"][args.vis_seq_name]    
+        joints_3d_dict = json.load(f)["annotations"][args.vis_seq_name]
     skeleton = load_skeleton(args.skeleton_file, 42)
-    
+
     # set video writer
-    output_video_path = os.path.join(args.save_path, f'vis_video_{args.vis_seq_name}_{args.vis_camera_name.replace("_mono10bit", "")}.mp4')
+    output_video_path = os.path.join(
+        args.save_path,
+        f'vis_video_{args.vis_seq_name}_{args.vis_camera_name.replace("_mono10bit", "")}.mp4',
+    )
     tmp_output_video_path = output_video_path.replace("vis_video", "tmp_vis_video")
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
     vis_img = cv2.imread(frame_list[0])
     H, W = vis_img.shape[:2]
     videoWriter = cv2.VideoWriter(tmp_output_video_path, fourcc, args.vis_fps, (W, H))
-    
-    for frame_path in tqdm(frame_list[:args.vis_limit]):
-        vis_img = visualize_pose_on_frame(frame_path, args.vis_camera_name, joints_3d_dict, ego_calib, skeleton)
+
+    for frame_path in tqdm(frame_list[: args.vis_limit]):
+        vis_img = visualize_pose_on_frame(
+            frame_path, args.vis_camera_name, joints_3d_dict, ego_calib, skeleton
+        )
         vis_img = cv2.cvtColor(vis_img, cv2.COLOR_RGB2BGR)
         videoWriter.write(vis_img)
-                
-    videoWriter.release()    
+
+    videoWriter.release()
     # reformat the video
-    ret = os.system(f"ffmpeg -y -i {tmp_output_video_path} -vcodec libx264 {output_video_path}")
+    ret = os.system(
+        f"ffmpeg -y -i {tmp_output_video_path} -vcodec libx264 {output_video_path}"
+    )
     assert ret == 0, "check ffmpeg processing"
     os.system(f"rm {tmp_output_video_path}")
     print(f"Saved visualization video to {output_video_path}")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Visualize hand pose on video frames and create a video.")
-    parser.add_argument("--ego_image_root", default="./data/assemblyhands/images/ego_images_rectified", type=str)
+    parser = argparse.ArgumentParser(
+        description="Visualize hand pose on video frames and create a video."
+    )
+    parser.add_argument(
+        "--ego_image_root",
+        default="./data/assemblyhands/images/ego_images_rectified",
+        type=str,
+    )
     parser.add_argument("--vis_set", default="val", type=str, help="val or test")
     parser.add_argument("--vis_camera_name", default="HMC_21179183_mono10bit", type=str)
-    parser.add_argument("--vis_seq_name", default="nusar-2021_action_both_9081-c11b_9081_user_id_2021-02-12_161433", type=str)
-    parser.add_argument("--calib_file", default="./data/assemblyhands/annotations/val/assemblyhands_val_ego_calib_v1-1.json", type=str)
-    parser.add_argument("--data_file", default="./data/assemblyhands/annotations/val/assemblyhands_val_ego_data_v1-1.json", type=str)
-    parser.add_argument("--kpt_file", default="./data/assemblyhands/annotations/val/assemblyhands_val_joint_3d_v1-1.json", type=str)
-    parser.add_argument("--skeleton_file", default="./data/assemblyhands/annotations/skeleton.txt", type=str)
+    parser.add_argument(
+        "--vis_seq_name",
+        default="nusar-2021_action_both_9081-c11b_9081_user_id_2021-02-12_161433",
+        type=str,
+    )
+    parser.add_argument(
+        "--calib_file",
+        default="./data/assemblyhands/annotations/val/assemblyhands_val_ego_calib_v1-1.json",
+        type=str,
+    )
+    parser.add_argument(
+        "--data_file",
+        default="./data/assemblyhands/annotations/val/assemblyhands_val_ego_data_v1-1.json",
+        type=str,
+    )
+    parser.add_argument(
+        "--kpt_file",
+        default="./data/assemblyhands/annotations/val/assemblyhands_val_joint_3d_v1-1.json",
+        type=str,
+    )
+    parser.add_argument(
+        "--skeleton_file",
+        default="./data/assemblyhands/annotations/skeleton.txt",
+        type=str,
+    )
     parser.add_argument("--save_path", default="vis-results/vis-gt", type=str)
-    parser.add_argument("--vis_limit", default=50, type=int, help="Limit number of frames for visualization.")
-    parser.add_argument("--vis_fps", default=10, type=int, help="Frames per second for the output video.")
-    args = parser.parse_args()        
-    
+    parser.add_argument(
+        "--vis_limit",
+        default=50,
+        type=int,
+        help="Limit number of frames for visualization.",
+    )
+    parser.add_argument(
+        "--vis_fps",
+        default=10,
+        type=int,
+        help="Frames per second for the output video.",
+    )
+    args = parser.parse_args()
+
     main(args)
