@@ -113,7 +113,7 @@ Note that released Assembly101 videos are not syncronized across all views. Thes
 ```
 python -m visualization.video_visualizer
 ```
-<img src="assets/videos/vis_gt_view_exo2,exo4_nusar-2021_action_both_9081-c11b_9081_user_id_2021-02-12_161433_resized.gif" height="200">
+<img src="assets/videos/vis_gt_view_exo2,exo4_nusar-2021_action_both_9081-c11b_9081_user_id_2021-02-12_161433_resized.gif" height="250">
 
 
 ## Related projects
