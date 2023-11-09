@@ -11,6 +11,7 @@ IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023\
 The dataset is also used in the challenge of the [HANDS workshop](https://sites.google.com/view/hands2023/home) in ICCV 2023.
 
 ## Release notes
+[Nov 08, 2023]: Add link to exocentriv videos (the 8 static RGB cameras used in automatic pose annotation).\
 [Oct 16, 2023]: Add link to egocentric camera calibration.\
 [Aug 11, 2023]: Add video visualizer in visualization/visualizer.py \
 [Jun 26, 2023]: Update src/common/utils & upload skeleton.txt in the "annotations" folder \
@@ -28,6 +29,7 @@ pytorch >= 1.11.0
 - Download the assemblyhands dataset from google drive.\
 [[ego images]](https://drive.google.com/drive/folders/1CZC0uRSmgHpNXFwXPBRJGcnu7NxWmO6A?usp=sharing)
 [[ego camera calibration]](https://drive.google.com/drive/folders/1uJfa2XHnShVpPua_EZoZcVTiTPUiHbnb?usp=sharing)
+[[exo_videos]](https://drive.google.com/drive/folders/1e_TIb2et_bBoa15DoBFjDT3pV-Ivqqzl?usp=sharing)
 [[annotations]](https://drive.google.com/drive/folders/1mPif4HbxfDbmAu7_prsVxqknL7nbJulI?usp=sharing)
 
 The number of images for each ego camera is not consistent because we only compressed valid egocentric images by excluding images without hands.
