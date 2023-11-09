@@ -229,14 +229,17 @@ def transform_input_to_output_space(
         joint_coord[:, 1] / cfg.input_img_shape[0] * cfg.output_hm_shape[1]
     )
     joint_coord[joint_type["right"], 2] = (
-        joint_coord[joint_type["right"], 2] - joint_coord[root_joint_idx["right"], 2]
+        joint_coord[joint_type["right"], 2] -
+        joint_coord[root_joint_idx["right"], 2]
     )
     joint_coord[joint_type["left"], 2] = (
-        joint_coord[joint_type["left"], 2] - joint_coord[root_joint_idx["left"], 2]
+        joint_coord[joint_type["left"], 2] -
+        joint_coord[root_joint_idx["left"], 2]
     )
 
     joint_coord[:, 2] = (
-        (joint_coord[:, 2] / (cfg.bbox_3d_size / 2) + 1) / 2.0 * cfg.output_hm_shape[0]
+        (joint_coord[:, 2] / (cfg.bbox_3d_size / 2) + 1) /
+        2.0 * cfg.output_hm_shape[0]
     )
     joint_valid = joint_valid * (
         (joint_coord[:, 2] >= 0) * (joint_coord[:, 2] < cfg.output_hm_shape[0])
@@ -353,8 +356,10 @@ def gen_trans_from_patch_cv(
 
     # augment rotation
     rot_rad = np.pi * rot / 180
-    src_downdir = rotate_2d(np.array([0, src_h * 0.5], dtype=np.float32), rot_rad)
-    src_rightdir = rotate_2d(np.array([src_w * 0.5, 0], dtype=np.float32), rot_rad)
+    src_downdir = rotate_2d(
+        np.array([0, src_h * 0.5], dtype=np.float32), rot_rad)
+    src_rightdir = rotate_2d(
+        np.array([src_w * 0.5, 0], dtype=np.float32), rot_rad)
 
     dst_w = dst_width
     dst_h = dst_height
@@ -385,3 +390,40 @@ def trans_point2d(pt_2d, trans):
     src_pt = np.array([pt_2d[0], pt_2d[1], 1.0]).T
     dst_pt = np.dot(trans, src_pt)
     return dst_pt[0:2]
+
+
+def parse_KRT(lines):
+    K = np.array(
+        [lines[0].split(), lines[1].split(), lines[2].split()], dtype=np.float32
+    )
+    Rt = np.array(
+        [lines[4].split(), lines[5].split(), lines[6].split()], dtype=np.float32
+    )
+    return K, Rt
+
+
+def get_calib(calib_path, seq_name=None, view_type="ego"):
+    assert os.path.exists(calib_path), f"calib path: {calib_path} not found"
+    if view_type == "ego":
+        with open(calib_path) as f:
+            calib = json.load(f)["calibration"]
+        if seq_name is not None:
+            calib = calib[seq_name]
+    elif view_type == "exo":
+        with open(calib_path) as f:
+            all_lines = [l for l in f.readlines() if l.strip()]
+        calib = {
+            "intrinsics": {},
+            "extrinsics": {},
+        }
+        cnt_line = 0
+        while cnt_line < len(all_lines):
+            cam = all_lines[cnt_line].strip()  # .decode()
+            cam_lines = all_lines[cnt_line + 1: cnt_line + 8]
+            cnt_line += 8
+            K, Rt = parse_KRT(cam_lines)
+            calib["intrinsics"][cam] = K
+            calib["extrinsics"][cam] = Rt
+    else:
+        raise NotImplementedError()
+    return calib

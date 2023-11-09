@@ -11,8 +11,7 @@ IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023\
 The dataset is also used in the challenge of the [HANDS workshop](https://sites.google.com/view/hands2023/home) in ICCV 2023.
 
 ## Release notes
-[Nov 08, 2023]: Add link to exocentric videos (the 8 static RGB cameras used in automatic pose annotation).\
-[Oct 16, 2023]: Add link to egocentric camera calibration.\
+[Nov 09, 2023]: Add link to exocentric videos and visualizer (the 8 static RGB cameras used in automatic pose annotation).\
 [Aug 11, 2023]: Add video visualizer in visualization/visualizer.py \
 [Jun 26, 2023]: Update src/common/utils & upload skeleton.txt in the "annotations" folder \
 [Jun 26, 2023]: Fix a tar file of "nusar-2021_action_both_9075-c08b_9075_user_id_2021-02-12_101609.tar.gz" in the google drive \
@@ -27,12 +26,11 @@ pytorch >= 1.11.0
 
 ## Dataset preparation
 - Download the assemblyhands dataset from google drive.\
-[[ego images]](https://drive.google.com/drive/folders/1CZC0uRSmgHpNXFwXPBRJGcnu7NxWmO6A?usp=sharing)
-[[ego camera calibration]](https://drive.google.com/drive/folders/1uJfa2XHnShVpPua_EZoZcVTiTPUiHbnb?usp=sharing)
+[[ego_images]](https://drive.google.com/drive/folders/1CZC0uRSmgHpNXFwXPBRJGcnu7NxWmO6A?usp=sharing)
 [[exo_videos]](https://drive.google.com/drive/folders/1e_TIb2et_bBoa15DoBFjDT3pV-Ivqqzl?usp=sharing)
 [[annotations]](https://drive.google.com/drive/folders/1mPif4HbxfDbmAu7_prsVxqknL7nbJulI?usp=sharing)
 
-The number of images for each ego camera is not consistent because we only compressed valid egocentric images by excluding images without hands.
+The number of images for each ego camera is not consistent because we only compressed valid images by excluding images without hands.
 
 - Assume the assemblyhands data is stored in \${DATA_DIR}. The structure of \${DATA_DIR} is as follows
 ```
@@ -40,6 +38,9 @@ The number of images for each ego camera is not consistent because we only compr
     - images
         - ego_images_rectified
             - split: {test, train, val}        
+    - videos
+        - exo_videos_rectified
+            - nusar-2021_*
     - annotations
         - skeleton.txt
         - split: {demo, test, train, val}  
@@ -48,17 +49,16 @@ The number of images for each ego camera is not consistent because we only compr
             - assemblyhands_${split}_joint_3d_v1-1.json
 
 ```
-Please see the `demo` annotations to check the format.
 
 - Link the data and annotations to this codebase.
 ```
 mkdir -p data/assemblyhands
 ln -s ${DATA_DIR}/images data/assemblyhands 
+ln -s ${DATA_DIR}/videos data/assemblyhands
 ln -s ${DATA_DIR}/annotations data/assemblyhands 
 ```
 
-The files that check image validity during data loading (`invalid_${split}_${modality}.txt`) will be generated when running the `dataset.py` first.
-With these files, image loading will be faster the second time and later.
+The files of invalid image list (`invalid_${split}_${modality}.txt`) will be generated when running the `dataset.py` first. With these files, image loading will be faster next time.
 
 ## Annotation format
 All annotations must be accessible in `data/assemblyhands/annotations/`.
@@ -86,7 +86,7 @@ Keypoint order: 0-20 Right, 21-41 Left
 
 ## Example of data loading and visualization
 We have implemented a data loader in `src/dataset/AssemblyHands-Ego` based on the [InterHand2.6M](https://github.com/facebookresearch/InterHand2.6M) code.\
-Run the following command to visualize the annotations.
+You can run this visualization to check the loaded images and annotations.
 ```
 python -m src.dataset.AssemblyHands-Ego.dataset
 ```
@@ -99,21 +99,32 @@ python -m src.dataset.AssemblyHands-Ego.dataset
 |<img src="assets/vis/vis_11070_left_2d.jpg" height="300"> | <img src="assets/vis/vis_11070_left_3d.jpg" height="300"> |
 
 ## Visualization
-This is a visualizer script loading a two-hand-pose json. Once you have predictions in world coordinates, you can visualize them as a video. Or you can use it for visualizing ground-truth.
+### Visualizing egocentric images
+This is a script of the frame-wise visualizer loading a two-hand-pose json.
+Given the ground-truth or the predictions in world coordinates, you can visualize rectified egocentric images and export them to a video.
 ```
-python visualization/visualizer.py
+python -m visualization.visualizer
 ```
-
 <img src="assets/videos/vis_video_nusar-2021_action_both_9081-c11b_9081_user_id_2021-02-12_161433_HMC_21179183.gif" height="400">
 
+###  Visualizing exocentric videos
+This is a script of the video-based visualizer for rectified exocentric videos.
+Note that released Assembly101 videos are not syncronized across all views. These rectified videos are syncronized and you can find the detail of this processing in [README](https://drive.google.com/file/d/1ssakEvQPAfNLG1RNLsLRuZsU70gI31tL/view?usp=drive_link).
+```
+python -m visualization.video_visualizer
+```
+<img src="assets/videos/vis_gt_view_exo2,exo4_nusar-2021_action_both_9081-c11b_9081_user_id_2021-02-12_161433_resized.gif" height="200">
+
+
 ## Related projects
-### ICCV 2023 HANDS challenge reports
+### ICCV 2023 HANDS challenge
+You can find the details of this competition: [[AssemblyHands@ICCV23]](https://sites.google.com/view/hands2023/challenges/assemblyhands). Here is a list of submitted technical reports.
+
 [A Concise Pipeline for Egocentric Hand Pose Reconstruction](https://drive.google.com/file/d/1C3oizCPxnQhZ_De_P9vZfszoIGUWelK3/view?usp=share_link): \
 Team: Zhishan Zhou*, Zhi Lv*, Shihao Zhou, Minqiang Zou, Tong Wu, Mochen Yu, Yao Tang, Jiajun Liang \
 Baseline:  ViT-based backbones and a simple regressor for 3D keypoints prediction \
 Preprocess: a warp perspective operation to make the hands near the edge less stretched \
 Postprocess: selective multi-view fusion, TTA, smoothing, and ensemble
-
 
 [Multi-View Fusion Strategy for Egocentric 3D Hand Pose Estimation](https://drive.google.com/file/d/1m_oJY0yvJZSLebDBopSL0Hsg0PhN-J_A/view?usp=share_link): \
 Team: Zhong Gao, Xuanyang Zhang \
