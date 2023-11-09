@@ -109,7 +109,8 @@ python -m visualization.visualizer
 
 ###  Visualizing exocentric videos
 This is a script of the video-based visualizer for rectified exocentric videos.
-Note that released Assembly101 videos are not syncronized across all views. These rectified videos are syncronized and you can find the detail of this processing in [README](https://drive.google.com/file/d/1ssakEvQPAfNLG1RNLsLRuZsU70gI31tL/view?usp=drive_link).
+Note that released videos from the original Assembly101 dataset are neither recitified nor necessarily syncronized across all views, but ours are. 
+You can find details regarding these videos in [README](https://drive.google.com/file/d/1ssakEvQPAfNLG1RNLsLRuZsU70gI31tL/view?usp=drive_link).
 ```
 python -m visualization.video_visualizer
 ```
