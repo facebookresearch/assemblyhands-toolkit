@@ -11,7 +11,7 @@ IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023\
 The dataset is also used in the challenge of the [HANDS workshop](https://sites.google.com/view/hands2023/home) in ICCV 2023.
 
 ## Release notes
-[Nov 08, 2023]: Add link to exocentriv videos (the 8 static RGB cameras used in automatic pose annotation).\
+[Nov 08, 2023]: Add link to exocentric videos (the 8 static RGB cameras used in automatic pose annotation).\
 [Oct 16, 2023]: Add link to egocentric camera calibration.\
 [Aug 11, 2023]: Add video visualizer in visualization/visualizer.py \
 [Jun 26, 2023]: Update src/common/utils & upload skeleton.txt in the "annotations" folder \
