@@ -131,8 +131,6 @@ Test data and evaluation can be found in [[HANDS2023-AssemblyHands]](https://git
 [[Benchmarks and Challenges in Pose Estimation for Egocentric Hand Interactions with Objects]](https://arxiv.org/abs/2403.16428): \
 Zicong Fan*, Takehiko Ohkawa*, Linlin Yang*, Nie Lin, Zhishan Zhou, Shihao Zhou, Jiajun Liang, Zhong Gao, Xuanyang Zhang, Xue Zhang, Fei Li, Liu Zheng, Feng Lu, Karim Abou Zeid, Bastian Leibe, Jeongwan On, Seungryul Baek, Aditya Prakash, Saurabh Gupta, Kun He, Yoichi Sato, Otmar Hilliges, Hyung Jin Chang, and Angela Yao (* equal contribution)
 
-
-
 <!-- 
 [A Concise Pipeline for Egocentric Hand Pose Reconstruction](https://drive.google.com/file/d/1C3oizCPxnQhZ_De_P9vZfszoIGUWelK3/view?usp=share_link): \
 Team: Zhishan Zhou*, Zhi Lv*, Shihao Zhou, Minqiang Zou, Tong Wu, Mochen Yu, Yao Tang, Jiajun Liang \
