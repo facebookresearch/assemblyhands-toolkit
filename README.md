@@ -3,14 +3,14 @@
 AssemblyHands Toolkit is a Python package that provides data loading, visualization, and evaluation tools for the AssemblyHands dataset. 
 The dataset and results were originally reported in a CVPR 2023 paper, see below:
 
-**AssemblyHands: Towards Egocentric Activity Understanding via 3D Hand Pose Estimation**\
-Takehiko Ohkawa, Kun He, Fadime Sener, Tomas Hodan, Luan Tran, and Cem Keskin\
-IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023\
-[ [paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Ohkawa_AssemblyHands_Towards_Egocentric_Activity_Understanding_via_3D_Hand_Pose_Estimation_CVPR_2023_paper.pdf) ][ [project page](https://assemblyhands.github.io) ][ [arXiv](https://arxiv.org/abs/tbd) ] 
+> **AssemblyHands: Towards Egocentric Activity Understanding via 3D Hand Pose Estimation**\
+> Takehiko Ohkawa, Kun He, Fadime Sener, Tomas Hodan, Luan Tran, and Cem Keskin\
+> IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2023\
+> [[Paper](https://openaccess.thecvf.com/content/CVPR2023/papers/Ohkawa_AssemblyHands_Towards_Egocentric_Activity_Understanding_via_3D_Hand_Pose_Estimation_CVPR_2023_paper.pdf)][[Project](https://assemblyhands.github.io)][ [arXiv](https://arxiv.org/abs/2304.12301)] 
 
-The dataset is also used in the challenge of the [HANDS workshop](https://sites.google.com/view/hands2023/home) in ICCV 2023.
 
 ## Release notes
+[Dec, 09, 2024]: Add original camera models and parameters under `calib`.\
 [Nov 09, 2023]: Add link to exocentric videos and visualizer (the 8 static RGB cameras used in automatic pose annotation).\
 [Aug 11, 2023]: Add video visualizer in visualization/visualizer.py \
 [Jun 26, 2023]: Update src/common/utils & upload skeleton.txt in the "annotations" folder \
