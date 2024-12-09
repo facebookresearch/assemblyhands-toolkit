@@ -118,9 +118,20 @@ python -m visualization.video_visualizer
 
 
 ## Related projects
-### ICCV 2023 HANDS challenge
-You can find the details of this competition: [[AssemblyHands@ICCV23]](https://sites.google.com/view/hands2023/challenges/assemblyhands). Here is a list of submitted technical reports.
+### Single-to-Dual-View Adaptation for Egocentric 3D Hand Pose Estimation (CVPR 2024)
+[[S2DHand]](https://github.com/ut-vision/S2DHand) proposes Single-to-Dual-view adaptation framework to adapt a traditional single-view hand pose estimator to arbitrary dual views. Pretrained single-view estimators are available.
 
+<img src="assets/teasers/s2dhand.png" height="250">
+
+
+### ICCV 2023 HANDS challenge
+This dataset is used in this competition: [[AssemblyHands@ICCV23]](https://sites.google.com/view/hands2023/challenges/assemblyhands). 
+Test data and evaluation can be found in [[HANDS2023-AssemblyHands]](https://github.com/ut-vision/HANDS2023-AssemblyHands). Submitted technical reports are compiled into the following report.
+
+[[Benchmarks and Challenges in Pose Estimation for Egocentric Hand Interactions with Objects]](https://arxiv.org/abs/2403.16428): \
+Zicong Fan*, Takehiko Ohkawa*, Linlin Yang*, Nie Lin, Zhishan Zhou, Shihao Zhou, Jiajun Liang, Zhong Gao, Xuanyang Zhang, Xue Zhang, Fei Li, Liu Zheng, Feng Lu, Karim Abou Zeid, Bastian Leibe, Jeongwan On, Seungryul Baek, Aditya Prakash, Saurabh Gupta, Kun He, Yoichi Sato, Otmar Hilliges, Hyung Jin Chang, and Angela Yao (* equal contribution)
+
+<!-- 
 [A Concise Pipeline for Egocentric Hand Pose Reconstruction](https://drive.google.com/file/d/1C3oizCPxnQhZ_De_P9vZfszoIGUWelK3/view?usp=share_link): \
 Team: Zhishan Zhou*, Zhi Lv*, Shihao Zhou, Minqiang Zou, Tong Wu, Mochen Yu, Yao Tang, Jiajun Liang \
 Baseline:  ViT-based backbones and a simple regressor for 3D keypoints prediction \
@@ -135,7 +146,7 @@ Techniques: selective Feature Transform Layers for multi-view fusion
 [Egocentric 3D Hand Pose Estimation](https://drive.google.com/file/d/1Y9YnbX2jPbXSpmRj5OIOy2txnBTqgAH1/view?usp=share_link): \
 Team: Xue Zhang, Jingyi Wang, Fei Li, Rujie Liu \
 Baseline: HandOccNet + 2D heatmap regressor \
-Postprocess: weighted multi-view fusion
+Postprocess: weighted multi-view fusion -->
 
 ## Citation & license
 Please cite the following article if our code helps you.
