@@ -128,8 +128,9 @@ python -m visualization.video_visualizer
 This dataset is used in this competition: [[AssemblyHands@ICCV23]](https://sites.google.com/view/hands2023/challenges/assemblyhands). 
 Test data and evaluation can be found in [[HANDS2023-AssemblyHands]](https://github.com/ut-vision/HANDS2023-AssemblyHands). Submitted technical reports are compiled into the following report.
 
-[[Benchmarks and Challenges in Pose Estimation for Egocentric Hand Interactions with Objects]](https://arxiv.org/abs/2403.16428): \
-Zicong Fan*, Takehiko Ohkawa*, Linlin Yang*, Nie Lin, Zhishan Zhou, Shihao Zhou, Jiajun Liang, Zhong Gao, Xuanyang Zhang, Xue Zhang, Fei Li, Liu Zheng, Feng Lu, Karim Abou Zeid, Bastian Leibe, Jeongwan On, Seungryul Baek, Aditya Prakash, Saurabh Gupta, Kun He, Yoichi Sato, Otmar Hilliges, Hyung Jin Chang, and Angela Yao (* equal contribution)
+>[[Benchmarks and Challenges in Pose Estimation for Egocentric Hand Interactions with Objects]](https://arxiv.org/abs/2403.16428): \
+> Zicong Fan*, Takehiko Ohkawa*, Linlin Yang*, Nie Lin, Zhishan Zhou, Shihao Zhou, Jiajun Liang, Zhong Gao, Xuanyang Zhang, Xue Zhang, Fei Li, Liu Zheng, Feng Lu, Karim Abou Zeid, Bastian Leibe, Jeongwan On, Seungryul Baek, Aditya Prakash, Saurabh Gupta, Kun He, Yoichi Sato, Otmar Hilliges, Hyung Jin Chang, and Angela Yao (* equal contribution)
+> European Conference on Computer Vision (ECCV), 2024
 
 <!-- 
 [A Concise Pipeline for Egocentric Hand Pose Reconstruction](https://drive.google.com/file/d/1C3oizCPxnQhZ_De_P9vZfszoIGUWelK3/view?usp=share_link): \
