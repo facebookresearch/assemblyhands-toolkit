@@ -26,7 +26,7 @@ pytorch >= 1.11.0
 
 ## Dataset preparation
 - Download the assemblyhands dataset from google drive.\
-[[ego_images]](https://drive.google.com/drive/folders/1CZC0uRSmgHpNXFwXPBRJGcnu7NxWmO6A?usp=sharing)
+[[ego_images]](https://drive.google.com/drive/folders/1slji-2LSOBo7eCYNqK6O-qpbvS7D2yXm\?usp\=sharing)
 [[exo_videos]](https://drive.google.com/drive/folders/1e_TIb2et_bBoa15DoBFjDT3pV-Ivqqzl?usp=sharing)
 [[annotations]](https://drive.google.com/drive/folders/1mPif4HbxfDbmAu7_prsVxqknL7nbJulI?usp=sharing)
 
